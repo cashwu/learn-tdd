@@ -1,3 +1,5 @@
+const Dollar = require("./money");
+
 describe("Money", () => {
   beforeEach(() => {
     // Setup code here
@@ -8,7 +10,7 @@ describe("Money", () => {
   });
 
   it("should create a new instance", () => {
-    let fiver = new Doller(5);
+    let fiver = new Dollar(5);
     let tenner = fiver.times(2);
     expect(tenner.amount).toBe(10);
   });
