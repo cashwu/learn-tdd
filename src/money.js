@@ -1,11 +1,23 @@
 class Dollar {
-  constructor(amount) {
+  constructor(amount, currency) {
     this.amount = amount;
+    this.currency = currency;
   }
 
   times(multiplier) {
-    return new Dollar(this.amount * multiplier);
+    return new Dollar(this.amount * multiplier, this.currency);
   }
 }
 
-module.exports = Dollar;
+class Money {
+  constructor(amount, currency) {
+    this.amount = amount;
+    this.currency = currency;
+  }
+
+  times(multiplier) {
+    return new Money(this.amount * multiplier, this.currency);
+  }
+}
+
+module.exports = { Dollar, Money };

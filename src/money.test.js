@@ -1,4 +1,4 @@
-const Dollar = require("./money");
+const { Dollar, Money } = require("./money");
 
 describe("Money", () => {
   beforeEach(() => {
@@ -16,7 +16,7 @@ describe("Money", () => {
   });
 
   it("10 eur x 2 = 20 eur", () => {
-    let tenEuros = new Dollar(10, "EUR");
+    let tenEuros = new Money(10, "EUR");
     let twentyEuros = tenEuros.times(2);
     expect(twentyEuros.amount).toBe(20);
     expect(twentyEuros.currency).toBe("EUR");
