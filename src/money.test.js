@@ -10,23 +10,20 @@ describe("Money", () => {
   });
 
   it("5 usd x 2 = 10 usd", () => {
-    let fiver = new Money(5, "USD");
-    let tenner = fiver.times(2);
-    expect(tenner.amount).toBe(10);
-    expect(tenner.currency).toBe("USD");
+    let five = new Money(5, "USD");
+    let ten = new Money(10, "USD");
+    expect(five.times(2)).toStrictEqual(ten);
   });
 
   it("10 eur x 2 = 20 eur", () => {
     let tenEuros = new Money(10, "EUR");
-    let twentyEuros = tenEuros.times(2);
-    expect(twentyEuros.amount).toBe(20);
-    expect(twentyEuros.currency).toBe("EUR");
+    let twenty = new Money(20, "EUR");
+    expect(tenEuros.times(2)).toStrictEqual(twenty);
   });
 
   it("4002 krw / 4 = 1000.5 krw", () => {
     let originalMoney = new Money(4002, "krw");
-    let actualMoneyAfterDivision = originalMoney.divide(4);
     let expectedMoneyAfterDivision = new Money(1000.5, "krw");
-    expect(actualMoneyAfterDivision).toStrictEqual(expectedMoneyAfterDivision);
+    expect(originalMoney.divide(4)).toStrictEqual(expectedMoneyAfterDivision);
   });
 });
