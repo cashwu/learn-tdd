@@ -22,4 +22,11 @@ describe("Money", () => {
     expect(twentyEuros.amount).toBe(20);
     expect(twentyEuros.currency).toBe("EUR");
   });
+
+  it("4002 krw / 4 = 1000.5 krw", () => {
+    let originalMoney = new Money(4002, "krw");
+    let actualMoneyAfterDivision = originalMoney.divide(4);
+    let expectedMoneyAfterDivision = new Money(1000.5, "krw");
+    expect(actualMoneyAfterDivision).toStrictEqual(expectedMoneyAfterDivision);
+  });
 });
