@@ -26,4 +26,14 @@ describe("Money", () => {
         let expectedMoneyAfterDivision = new Money(1000.5, "krw");
         expect(originalMoney.divide(4)).toStrictEqual(expectedMoneyAfterDivision);
     });
+
+    it("5 usd + 10 usd = 15 usd", () => {
+
+        let fifteen = new Money(15, "USD");
+        let portfolio = new Portfolio();
+
+        portfolio.add(new Money(5, "USD"), new Money(10, "USD"));
+
+        expect(portfolio.evaluate("USD")).toStrictEqual(fifteen);
+    });
 });
