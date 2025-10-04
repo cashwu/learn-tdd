@@ -1,4 +1,5 @@
-const Money = require("./money");
+const {Money, Portfolio} = require("./money");
+
 
 describe("Money", () => {
     beforeEach(() => {
