@@ -29,6 +29,10 @@ class Portfolio {
             return money.amount;
         }
 
+        if (currency === "JPY") {
+            throw new Error();
+        }
+
         let key = money.currency + "->" + currency;
         return money.amount * exchangeRates.get(key);
     }
