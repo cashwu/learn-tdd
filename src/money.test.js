@@ -79,4 +79,19 @@ describe("Money", () => {
         expect(() => portfolio.evaluate("JPY")).toThrow();
     });
 
+
+    it('bank conversion', () => {
+
+        let bank = new Bank();
+
+        bank.addExchangeRate("EUR", "USD", 1.2);
+
+        let tenEuros = new Money(10, "EUR");
+
+        let expected = new Money(12, "USD");
+
+        expect(bank.convert(tenEuros, "USD")).toStrictEqual(expected);
+    });
+
+
 });
