@@ -20,11 +20,13 @@ class Portfolio {
     }
 
     convert(money, currency) {
+        let eurToUsd = 1.2;
+
         if (money.currency === currency) {
             return money.amount;
         }
 
-        return money.amount * 1.2;
+        return money.amount * eurToUsd;
     }
 }
 
