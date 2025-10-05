@@ -12,11 +12,23 @@ class Portfolio {
     }
 
     evaluate(currency) {
+        let failures = [];
         let total = this.money.reduce((sum, money) => {
-            return sum + this.convert(money, currency);
+            let convertAmount = this.convert(money, currency);
+
+            if (convertAmount === undefined) {
+                failures.push(money.currency + "->" + currency);
+                return sum;
+            }
+
+            return sum + convertAmount;
         }, 0);
 
-        return new Money(total, currency);
+        if (!failures.length) {
+            return new Money(total, currency);
+        }
+
+        throw new Error("Currency conversion failed for: " + failures.join(", "));
     }
 
     convert(money, currency) {
@@ -33,7 +45,7 @@ class Portfolio {
         let rate = exchangeRates.get(key);
 
         if (rate === undefined) {
-            throw new Error();
+            return undefined
         }
 
         return money.amount * rate;
