@@ -1,5 +1,6 @@
 const Money = require("./money");
 const Portfolio = require("./Portfolio");
+const test = require("node:test");
 
 
 describe("Money", () => {
@@ -37,5 +38,19 @@ describe("Money", () => {
         portfolio.add(new Money(5, "USD"), new Money(10, "USD"));
 
         expect(portfolio.evaluate("USD")).toStrictEqual(fifteen);
+    });
+
+
+    it('5 usd + 10 eur = 17 usd', () => {
+
+        let fiveDollars = new Money(5, "USD");
+        let tenEuros = new Money(10, "EUR");
+        let portfolio = new Portfolio();
+
+        portfolio.add(fiveDollars, tenEuros);
+
+        let expected = new Money(17, "USD");
+
+        expect(portfolio.evaluate("USD")).toStrictEqual(expected);
     });
 });
