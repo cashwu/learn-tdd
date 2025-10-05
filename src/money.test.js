@@ -66,4 +66,17 @@ describe("Money", () => {
 
         expect(portfolio.evaluate("KRW")).toStrictEqual(expected);
     });
+
+
+    it('1 usd + 100 jpy error', () => {
+
+        let fiveDollars = new Money(1, "USD");
+        let tenEuros = new Money(100, "JPY");
+        let portfolio = new Portfolio();
+
+        portfolio.add(fiveDollars, tenEuros);
+
+        expect(() => portfolio.evaluate("JPY")).toThrow();
+    });
+
 });
