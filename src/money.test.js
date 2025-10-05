@@ -4,12 +4,17 @@ const Bank = require("./Bank");
 
 
 describe("Money", () => {
+
+    this.bank = undefined;
+
     beforeEach(() => {
-        // Setup code here
+        this.bank = new Bank();
+        this.bank.addExchangeRate("EUR", "USD", 1.2);
+        this.bank.addExchangeRate("USD", "KRW", 1100);
     });
 
     afterEach(() => {
-        // Cleanup code here
+        this.bank = undefined;
     });
 
     it("5 usd x 2 = 10 usd", () => {
@@ -53,10 +58,7 @@ describe("Money", () => {
 
         let expected = new Money(17, "USD");
 
-        let bank = new Bank();
-        bank.addExchangeRate("EUR", "USD", 1.2);
-
-        expect(portfolio.evaluate(bank, "USD")).toStrictEqual(expected);
+        expect(portfolio.evaluate(this.bank, "USD")).toStrictEqual(expected);
     });
 
     it('1 usd + 1100 krw = 2200 krw', () => {
@@ -69,10 +71,7 @@ describe("Money", () => {
 
         let expected = new Money(2200, "KRW");
 
-        let bank = new Bank();
-        bank.addExchangeRate("USD", "KRW", 1100);
-
-        expect(portfolio.evaluate(bank, "KRW")).toStrictEqual(expected);
+        expect(portfolio.evaluate(this.bank, "KRW")).toStrictEqual(expected);
     });
 
 
@@ -90,15 +89,14 @@ describe("Money", () => {
 
     it('bank conversion', () => {
 
-        let bank = new Bank();
-
-        bank.addExchangeRate("EUR", "USD", 1.2);
-
         let tenEuros = new Money(10, "EUR");
-
         let expected = new Money(12, "USD");
 
-        expect(bank.convert(tenEuros, "USD")).toStrictEqual(expected);
+        expect(this.bank.convert(tenEuros, "USD")).toStrictEqual(expected);
+
+        this.bank.addExchangeRate("EUR", "USD", 1.3);
+        expect(this.bank.convert(tenEuros, "USD"))
+            .toStrictEqual(new Money(13, "USD"));
     });
 
 
