@@ -37,7 +37,9 @@ describe("Money", () => {
 
         portfolio.add(new Money(5, "USD"), new Money(10, "USD"));
 
-        expect(portfolio.evaluate("USD")).toStrictEqual(fifteen);
+        let bank = new Bank();
+
+        expect(portfolio.evaluate(bank, "USD")).toStrictEqual(fifteen);
     });
 
 
@@ -51,7 +53,10 @@ describe("Money", () => {
 
         let expected = new Money(17, "USD");
 
-        expect(portfolio.evaluate("USD")).toStrictEqual(expected);
+        let bank = new Bank();
+        bank.addExchangeRate("EUR", "USD", 1.2);
+
+        expect(portfolio.evaluate(bank, "USD")).toStrictEqual(expected);
     });
 
     it('1 usd + 1100 krw = 2200 krw', () => {
@@ -64,7 +69,10 @@ describe("Money", () => {
 
         let expected = new Money(2200, "KRW");
 
-        expect(portfolio.evaluate("KRW")).toStrictEqual(expected);
+        let bank = new Bank();
+        bank.addExchangeRate("USD", "KRW", 1100);
+
+        expect(portfolio.evaluate(bank, "KRW")).toStrictEqual(expected);
     });
 
 
