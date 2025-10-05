@@ -94,4 +94,14 @@ describe("Money", () => {
     });
 
 
+    it('conversion with messing exchange', () => {
+
+        let bank = new Bank();
+
+        let tenEuros = new Money(10, "EUR");
+
+        expect(() => bank.convert(tenEuros, "USD")).toThrow(new Error("EUR->USD"));
+    });
+
+
 });
