@@ -1,4 +1,5 @@
-const {Money, Portfolio} = require("./money");
+const Money = require("./money");
+const Portfolio = require("./Portfolio");
 
 
 describe("Money", () => {
