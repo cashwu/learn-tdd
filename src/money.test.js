@@ -53,4 +53,17 @@ describe("Money", () => {
 
         expect(portfolio.evaluate("USD")).toStrictEqual(expected);
     });
+
+    it('1 usd + 1100 krw = 2200 krw', () => {
+
+        let fiveDollars = new Money(1, "USD");
+        let tenEuros = new Money(1100, "KRW");
+        let portfolio = new Portfolio();
+
+        portfolio.add(fiveDollars, tenEuros);
+
+        let expected = new Money(2200, "KRW");
+
+        expect(portfolio.evaluate("KRW")).toStrictEqual(expected);
+    });
 });
