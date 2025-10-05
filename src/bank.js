@@ -2,12 +2,28 @@ const Money = require("./money");
 
 class Bank {
 
-    addExchangeRate(currencyFrom, currencyTo, rate) {
+    exchangeRates = new Map();
 
+    addExchangeRate(currencyFrom, currencyTo, rate) {
+        let key = currencyFrom + "->" + currencyTo;
+        this.exchangeRates.set(key, rate);
     }
 
     convert(money, currency) {
-        return new Money(12, "USD")
+
+        if (money.currency === currency) {
+            return new Money(money.amount, currency);
+        }
+
+        let key = money.currency + "->" + currency;
+
+        let rate = this.exchangeRates.get(key);
+
+        if (rate === undefined) {
+            throw new Error("Failed");
+        }
+
+        return new Money(money.amount * rate, currency)
     }
 }
 
