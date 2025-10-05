@@ -28,13 +28,15 @@ class Portfolio {
         if (money.currency === currency) {
             return money.amount;
         }
+        let key = money.currency + "->" + currency;
 
-        if (currency === "JPY") {
+        let rate = exchangeRates.get(key);
+
+        if (rate === undefined) {
             throw new Error();
         }
 
-        let key = money.currency + "->" + currency;
-        return money.amount * exchangeRates.get(key);
+        return money.amount * rate;
     }
 }
 
