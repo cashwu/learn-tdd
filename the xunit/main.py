@@ -44,6 +44,15 @@ class WasRun(TestCase):
         raise Exception()
 
 
+class TestSuit:
+
+    def __init__(self):
+        self.tests = []
+
+    def add(self, test):
+        self.tests.append(test)
+
+
 class TestCaseTest(TestCase):
 
     def testTemplateMethod(self):
@@ -95,7 +104,4 @@ class TestResult:
 
 
 if __name__ == '__main__':
-    print(TestCaseTest("testTemplateMethod").run().summary())
-    print(TestCaseTest("testResult").run().summary())
-    print(TestCaseTest("testFailedResultFormatting").run().summary())
-    print(TestCaseTest("testFailedResult").run().summary())
+    TestCaseTest("testStart").run()
