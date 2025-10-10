@@ -25,6 +25,7 @@ class WasRun(TestCase):
 
     def testMethod(self):
         self.wasRun = 1
+        self.log = self.log + "testMethod "
 
 
 class TestCaseTest(TestCase):
