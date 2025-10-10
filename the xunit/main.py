@@ -9,8 +9,11 @@ class TestCase:
         result = TestResult()
         result.testStart()
         self.setUp()
-        method = getattr(self, self.name)
-        method()
+        try:
+            method = getattr(self, self.name)
+            method()
+        except:
+            result.testFailed()
         self.tearDown()
         return result
 
@@ -56,6 +59,7 @@ class TestCaseTest(TestCase):
     def testFailedResult(self):
         test = WasRun("testBrokenMethod")
         result = test.run()
+        print(result.summary())
         assert ("1 run, 1 failed" == result.summary())
 
     def testFailedResultFormatting(self):
@@ -83,4 +87,4 @@ class TestResult:
 
 
 if __name__ == '__main__':
-    TestCaseTest("testFailedResultFormatting").run()
+    TestCaseTest("testFailedResult").run()
