@@ -46,16 +46,19 @@ class TestCaseTest(TestCase):
     def testResult(self):
         test = WasRun("testMethod")
         result = test.run()
-        assert ("1 run, 0 failed", result.summary())
+        assert ("1 run, 0 failed" == result.summary())
 
 
 class TestResult:
 
     def __init__(self):
-        self.runCount = 1
+        self.runCount = 0
+
+    def testStart(self):
+        self.runCount = self.runCount + 1
 
     def summary(self):
-        return "%d run 0 failed" % self.runCount
+        return "%d run, 0 failed" % self.runCount
 
 
 if __name__ == '__main__':
