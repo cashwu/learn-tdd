@@ -62,6 +62,7 @@ class TestCaseTest(TestCase):
         result = TestResult()
         result.testStart()
         result.testFailed()
+        print(result.summary())
         assert ("1 run, 1 failed" == result.summary())
 
 
@@ -78,7 +79,7 @@ class TestResult:
         self.errorCount = self.errorCount + 1
 
     def summary(self):
-        return "%d run, 0 failed" % self.runCount
+        return "%d run, %s failed" % (self.runCount, self.errorCount)
 
 
 if __name__ == '__main__':
