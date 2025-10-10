@@ -32,17 +32,13 @@ class TestCaseTest(TestCase):
     def setUp(self):
         self.test = WasRun("testMethod")
 
-    def testRunning(self):
-        self.test.run()
-        assert (self.test.wasRun)
-
-    def testSetUp(self):
+    def testTemplateMethod(self):
         self.test.run()
         assert ("setUp testMethod " == self.test.log)
 
 
 if __name__ == '__main__':
-    TestCaseTest("testSetUp").run()
+    TestCaseTest("testTemplateMethod").run()
     # test = WasRun("testMethod")
     # print(test.wasRun)
     # test.run()
