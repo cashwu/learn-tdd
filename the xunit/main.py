@@ -88,7 +88,8 @@ class TestCaseTest(TestCase):
         suit = TestSuit()
         suit.add(WasRun("testMethod"))
         suit.add(WasRun("testBrokenMethod"))
-        result = suit.run()
+        result = TestResult
+        suit.run(result)
         print(result.summary())
         assert ("2 run, 1 failed" == result.summary())
 
