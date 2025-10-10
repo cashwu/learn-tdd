@@ -5,8 +5,7 @@ class TestCase:
     def setUp(self):
         pass
 
-    def run(self):
-        result = TestResult()
+    def run(self, result):
         result.testStart()
         self.setUp()
         try:
@@ -15,7 +14,6 @@ class TestCase:
         except:
             result.testFailed()
         self.tearDown()
-        return result
 
     def tearDown(self):
         pass
@@ -52,8 +50,7 @@ class TestSuit:
     def add(self, test):
         self.tests.append(test)
 
-    def run(self):
-        result = TestResult()
+    def run(self, result):
         for test in self.tests:
             test.run(result)
         return result
