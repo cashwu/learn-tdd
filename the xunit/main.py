@@ -53,32 +53,32 @@ class TestSuit:
     def run(self, result):
         for test in self.tests:
             test.run(result)
-        return result
 
 
 class TestCaseTest(TestCase):
 
     def testTemplateMethod(self):
         test = WasRun("testMethod")
-        test.run()
+        result = TestResult()
+        test.run(result)
         assert ("setUp testMethod tearDown " == test.log)
 
     def testResult(self):
         test = WasRun("testMethod")
-        result = test.run()
+        result = TestResult()
+        test.run(result)
         assert ("1 run, 0 failed" == result.summary())
 
     def testFailedResult(self):
         test = WasRun("testBrokenMethod")
-        result = test.run()
-        print(result.summary())
+        result = TestResult()
+        test.run(result)
         assert ("1 run, 1 failed" == result.summary())
 
     def testFailedResultFormatting(self):
         result = TestResult()
         result.testStart()
         result.testFailed()
-        print(result.summary())
         assert ("1 run, 1 failed" == result.summary())
 
     def testSuit(self):
@@ -87,7 +87,6 @@ class TestCaseTest(TestCase):
         suit.add(WasRun("testBrokenMethod"))
         result = TestResult
         suit.run(result)
-        print(result.summary())
         assert ("2 run, 1 failed" == result.summary())
 
 
@@ -103,9 +102,17 @@ class TestResult:
     def testFailed(self):
         self.errorCount = self.errorCount + 1
 
-    def summary(self):
+    def summary(self) -> str:
         return "%d run, %s failed" % (self.runCount, self.errorCount)
 
 
 if __name__ == '__main__':
-    TestCaseTest("testStart").run()
+    suit = TestSuit()
+    suit.add(TestCaseTest("testTemplateMethod"))
+    suit.add(TestCaseTest("testResult"))
+    suit.add(TestCaseTest("testFailedResult"))
+    suit.add(TestCaseTest("testFailedResultFormatting"))
+    suit.add(TestCaseTest("testSuit"))
+    result = TestResult()
+    suit.run(result)
+    print(result.summary())
