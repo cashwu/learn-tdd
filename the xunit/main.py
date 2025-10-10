@@ -57,37 +57,35 @@ class TestSuit:
 
 class TestCaseTest(TestCase):
 
+    def setUp(self):
+        self.result = TestResult()
+
     def testTemplateMethod(self):
         test = WasRun("testMethod")
-        result = TestResult()
-        test.run(result)
+        test.run(self.result)
         assert ("setUp testMethod tearDown " == test.log)
 
     def testResult(self):
         test = WasRun("testMethod")
-        result = TestResult()
-        test.run(result)
-        assert ("1 run, 0 failed" == result.summary())
+        test.run(self.result)
+        assert ("1 run, 0 failed" == self.result.summary())
 
     def testFailedResult(self):
         test = WasRun("testBrokenMethod")
-        result = TestResult()
-        test.run(result)
-        assert ("1 run, 1 failed" == result.summary())
+        test.run(self.result)
+        assert ("1 run, 1 failed" == self.result.summary())
 
     def testFailedResultFormatting(self):
-        result = TestResult()
-        result.testStart()
-        result.testFailed()
-        assert ("1 run, 1 failed" == result.summary())
+        self.result.testStart()
+        self.result.testFailed()
+        assert ("1 run, 1 failed" == self.fresult.summary())
 
     def testSuit(self):
-        suit = TestSuit()
-        suit.add(WasRun("testMethod"))
-        suit.add(WasRun("testBrokenMethod"))
-        result = TestResult
-        suit.run(result)
-        assert ("2 run, 1 failed" == result.summary())
+        suite = TestSuit()
+        suite.add(WasRun("testMethod"))
+        suite.add(WasRun("testBrokenMethod"))
+        suite.run(self.result)
+        assert ("2 run, 1 failed" == self.result.summary())
 
 
 class TestResult:
